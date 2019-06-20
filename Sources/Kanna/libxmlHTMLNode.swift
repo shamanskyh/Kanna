@@ -24,7 +24,7 @@ SOFTWARE.
 */
 import Foundation
 
-import libxmlKanna
+import libxml2
 
 /**
 libxmlHTMLNode

@@ -8,22 +8,15 @@ let package = Package(
       .library(name: "Kanna", targets: ["Kanna"]),
     ],
     targets: [
-        .systemLibrary(
-                name: "libxmlKanna",
-                path: "Modules",
-                pkgConfig: "libxml-2.0",
-                providers: [
-                    .brew(["libxml2"]),
-                    .apt(["libxml2-dev"])
-                ]),
         .target(name: "Kanna",
-                dependencies: ["libxmlKanna"],
                 path: "Sources",
                 exclude: [
                     "Sources/Info.plist",
                     "Sources/Kanna.h",
                     "Tests/KannaTests/Data"
-                ]),
+                ],
+                cSettings: [.headerSearchPath("$(SDKROOT)/usr/include/libxml2")],
+                linkerSettings: [.linkedLibrary("xml2")]),
         .testTarget(name: "KannaTests",
                     dependencies: ["Kanna"]
                 )
